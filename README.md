@@ -10,6 +10,12 @@ src: ZUL files for the prototype
 ## Dev deployments
 https://console.clever-cloud.com/users/me
 
+Read:\
+https://www.clever-cloud.com/doc/clever-cloud-overview/add-application/ \
+https://www.clever-cloud.com/doc/java/java-maven/   \
+
+
+
 ### ZK Resources
 ZK Deployment Manually \
 https://www.zkoss.org/wiki/ZK_Installation_Guide/Quick_Start/Create_and_Run_Your_First_ZK_Application_Manually
