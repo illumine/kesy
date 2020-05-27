@@ -1,0 +1,9 @@
+{
+  "build": {
+    "type": "maven",
+    "goal": "single"
+  },
+  "deploy": {
+    "jarName": "dist/ZkTest.war"
+  }
+}
