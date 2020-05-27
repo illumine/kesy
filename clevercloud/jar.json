@@ -4,6 +4,6 @@
     "goal": "package"
   },
   "deploy": {
-    "jarName": "dist/ZkTest.war"
+    "jarName": "target/ZkTest.war"
   }
 }
