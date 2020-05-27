@@ -1,0 +1,150 @@
+<?page title="Σύστημα Αξιολογήσεων Μαθητών ΚΕΣΥ" contentType="text/html;charset=UTF-8"?>
+<?link rel="icon" type="image/x-icon" href="img/favicon.ico"?>
+<zk>
+	<include id="ph" sclass="header" src="header.zul" />
+
+<window  border="normal" width="1400px"
+    apply="org.zkoss.bind.BindComposer"
+    viewModel="@id('vm')@init('org.example.MyViewModel')"
+    validationMessages="@id('vmsgs')">
+	<!--
+    Use tables: select student details from student and evaluation details from student_evaluation
+    -->
+	<grid>
+		<rows>
+			<row width="100%">
+				<label value="Αναθέσεις Μαθητών:" />
+				<label value="Εύρεση Αναθέσης - Κριτήρια Επιλογής" />
+			</row>
+			<row>
+				Αριθμός Μητρώου
+				<textbox name="studentAM" width="100%"/>
+			</row>
+			<row>
+				Επώνυμο Μαθητή
+				<textbox name="studentSurname"  width="100%"/>
+			</row>
+			<row>
+				'Ετος εισαγωγής στο σύστημα
+				<datebox width="100%"/>
+			</row>
+			<row>
+				<hlayout>
+				<button label="Εύρεση" onClick="@command('find')"/>
+				<button label="Καθαρισμός" onClick="@command('clean')"/>
+				</hlayout>
+			</row>
+		</rows>
+	</grid>
+
+		<listbox rows="10" width="100%">
+			<listhead>
+				<listheader label="Α.Μ." width="5%" />
+				<listheader label="Όνομα" width="10%" />
+				<listheader label="Επίθετο" width="10%" />
+				<listheader label="Σχολείο" width="10%" />
+				<listheader label="Ημερομηνία" width="5%" />
+				<listheader label="Παρατηρήσεις" width="50%" />
+				<listheader label="Επόμενο ραντεβού" width="10%" />
+			</listhead>
+			<listitem value="">
+				<listcell label="" />
+				<listcell label="" />
+				<listcell label="" />
+				<listcell label="" />
+				<listcell label="" />
+				<listcell label="" />
+				<listcell label="" />
+			</listitem>
+		</listbox>
+
+
+
+
+	<!--
+    Use tables: select student details from student_evaluation and do CRUD on records of  student_case_task
+    and inserts attachments to student_document and document
+    -->
+
+
+	<grid>
+		<rows>
+			<row width="100%">
+				<label value="Ανάθεση:" />
+				<label value="Ανάθεση μαθητή" />
+			</row>
+			<row>
+				<!-- Display only - not editable: existing A.M. of the student the evaluation is for. -->
+				Αριθμός Μητρώου Μαθητή
+				<label  width="100%"/>
+			</row>
+			<row>
+				<!-- Display only - not editable: existing surname of the student the evaluation is for. -->
+				Επώνυμο Μαθητή
+				<label   width="100%"/>
+			</row>
+			<row>
+				<!-- Display only - not editable: existing name of the student the evaluation is for. -->
+				Όνομα Μαθητή
+				<label   width="100%"/>
+			</row>
+			<row style="background:#BDE0F7;border: 1px solid grey;text-align:justify;text-align:center">
+				Προσωπικό που θα μετέχει στην Αξιολόγηση
+			</row>
+			<!-- Follows new data for defining the student_case_task. -->
+
+			<row>
+				Παρατηρήσεις  <textbox  cols="20" width="100%" />
+			</row>
+			<row>
+				Επόμενο ραντεβού  <datebox  cols="20" width="100%" />
+			</row>
+			<row>
+			Έγγραφα
+				<!-- Uploaded document populates the following tables:
+                     insert into document, student_document -->
+			<vbox width="99%">
+				Επιλέξτε τα αρχεία που συνοδεύουν το μαθητή
+				<listbox rows="4" width="99%">
+					<listhead>
+						<listheader label="Αρ." width="5%" />
+						<listheader label="Αρχείο" />
+					</listhead>
+					<listitem value="">
+						<listcell label="" />
+						<listcell label="" />
+					</listitem>
+					<listfoot>
+						<listfooter label="" width="20%" />
+						<listfooter
+								label="Ανεβάσατε 0 Αρχεία 0 ΜΒ" />
+					</listfoot>
+				</listbox>
+				<hbox>
+					<button label="Εισαγωγή Νέου Αρχείου" />
+					<button label="Ακύρωση Αρχείου" />
+				</hbox>
+			</vbox>
+			</row>
+			<row>
+				<hlayout>
+					<button label="Καθαρισμός" onClick="@command('clean')"/>
+					<button label="Εισαγωγή" onClick="@command('new')" href="index.zul"/>
+					<button label="Ενημέρωση" onClick="@command('update')" href="index.zul"/>
+				</hlayout>
+				<hlayout>
+					<button label="Νέα Εγγραφή" onClick="@command('new')"/>
+					<button label="Διαγραφή"  onClick="@command('delete')"/>
+				</hlayout>
+			</row>
+			<row>
+				Αποτέλεσμα Ενέργειας
+				<label id="resLabel"  width="99%"/>
+			</row>
+		</rows>
+	</grid>
+
+
+	</window>
+	<include id="footer" sclass="footer" src="footer.zul" />
+</zk>

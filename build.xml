@@ -1,0 +1,72 @@
+<project name="MyProject" default="dist" basedir=".">
+    <description>
+        simple example build file
+    </description>
+    <!-- set global properties for this build -->
+    <property name="src" location="src/main"/>
+    <property name="build" location="build"/>
+    <property name="dist" location="dist"/>
+
+    <target name="init">
+        <!-- Create the time stamp -->
+        <tstamp/>
+        <!-- Create the build directory structure used by compile -->
+        <mkdir dir="${build}"/>
+        <mkdir dir="${build}/WEB-INF"/>
+        <mkdir dir="${build}/WEB-INF/lib"/>
+        <mkdir dir="${build}/META-INF"/>
+        <mkdir dir="${build}/img"/>
+    </target>
+
+    <target name="copyfiles" depends="init"
+            description="Create deployment">
+        <copy todir="${build}/WEB-INF/lib">
+            <fileset dir="zklibs"/>
+        </copy>
+        <copy todir="${build}/WEB-INF">
+            <fileset dir="${src}/webapp/WEB-INF">
+                <include name="*.xml"/>
+            </fileset>
+        </copy>
+        <copy todir="${build}/META-INF">
+            <fileset dir="${src}/webapp/META-INF">
+                <include name="*.MF"/>
+            </fileset>
+        </copy>
+        <copy todir="${build}">
+            <fileset dir="${src}/webapp">
+                <include name="*.zul"/>
+                <include name="*.html"/>
+            </fileset>
+        </copy>
+        <copy todir="${build}/img">
+            <fileset dir="${src}/webapp/img">
+                <include name="*.png"/>
+                <include name="*.ico"/>
+            </fileset>
+        </copy>
+    </target>
+
+
+    <!--
+  <target name="compile" depends="copyfiles"
+          description="compile the source">
+      Compile the Java code from ${src} into ${build}
+        <javac srcdir="${src}/java" destdir="${build}"/>
+    </target>
+        -->
+    <target name="dist" depends="copyfiles"
+            description="generate the distribution">
+
+        <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file
+        <jar jarfile="${dist}/kesy-${DSTAMP}.jar" basedir="${build}"/> -->
+        <jar jarfile="${dist}/ZkTest.war" basedir="${build}"/>
+    </target>
+
+    <target name="clean"
+            description="clean up">
+        <!-- Delete the ${build} and ${dist} directory trees -->
+        <delete dir="${build}"/>
+        <delete dir="${dist}"/>
+    </target>
+</project>

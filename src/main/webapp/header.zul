@@ -1,0 +1,92 @@
+<!--
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?taglib uri="http://www.zkoss.org/zkspring/security" prefix="sec"?>
+<?page title="Page Header" contentType="text/html;charset=UTF-8"?>
+-->
+<zk>
+    <hbox spacing="10px"
+          style="background:#BDE0F7;border: 1px solid grey" width="100%">
+        <image src="img/logo.png" />
+        <html
+                style="font-family:arial;color:#183682;font-size:45px;text-align:justify;text-valign:center"
+                content="Σύστημα Αξιολογήσεων Μαθητών ΚΕΣΥ" width="100%" />
+    </hbox>
+    <div height="5px;"></div>
+    <style>
+        .z-menubar-hor, .z-menubar-ver { border: 1px solid #D8D8D8; }
+    </style>
+
+    <html>
+
+
+        <![CDATA[ <style type="text/css"> #feedback img { border:none; }
+
+		#feedback a { background:#FEF9CD; border-top:2px double #6495ED;
+		border-right:2px double #6495ED; border-bottom:2px double
+		#6495ED; display:block; position:fixed; right:-1px; top:200px; }
+		#feedback a:hover { border-color:#0001aa; background:#e0ecf8; }
+
+		#mask { position:absolute; left:0; top:0; z-index:9000;
+		background-color:#000; display:none; }
+
+		#boxes .window { left:0; top:0; width:440px; height:200px;
+		display:none; z-index:9999; padding:20px; position:absolute; }
+
+		#boxes #dialog { width:375px; height:203px; padding:10px;
+		background-color:#ffffff; } </style>
+
+
+
+		<div id="feedback"> <a class="feedbacklink"
+		href="http://illumineit.com" target="_blank">
+		<img src="img/feedback.png"> </a> </div>
+
+		]]>
+
+
+    </html>
+
+
+    <menubar>
+        <menuitem label="Αρχική"    src="img/home.png" href="index.zul"/>
+        <menu label="Σχολείο">
+            <menupopup>
+                <menuitem label="Σχολεία"     href="school.zul"/>
+                <menuseparator/>
+                <menuitem label="Προσωπικό"   href="personel.zul"/>
+                <menuseparator/>
+                <menuitem label="Μαθητές"     href="student.zul"/>
+            </menupopup>
+        </menu>
+        <menu label="Αναθέσεις">
+            <menupopup>
+                <menuitem label="Οι Αναθέσεις μου" href="my_cases.zul"/>
+                <menuseparator/>
+                <menuitem label="Τα Στατιστικά μου" href="my_stats.zul"/>
+            </menupopup>
+        </menu>
+        <menu label="Αναφορές">
+            <menupopup>
+                <menuitem label="Ολες οι Αναθέσεις" href="document_types_page.zul"/>
+                <menuseparator/>
+                <menuitem label="Γενικά Στατιστικά" href="parameters_page.zul"/>
+            </menupopup>
+        </menu>
+        <menu label="Διαχείριση">
+            <menupopup>
+                <menuitem label="Άλλες Παράμετροι" href="application_params.zul"/>
+                <menuseparator/>
+            </menupopup>
+        </menu>
+        <menu label="Βοήθεια">
+            <menupopup>
+                <menuitem label="Κοινότητα Χρηστών"  href="http://illumineit.com"/>
+                <menuitem label="Χρήσιμοι Σύνδεσμοι" href="links_page.zul"/>
+                <menuitem label="Σχετικά" href="about_page.zul"/>
+            </menupopup>
+        </menu>
+    </menubar>
+
+    <div height="5px;"></div>
+
+</zk>

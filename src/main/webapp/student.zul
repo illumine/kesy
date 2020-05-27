@@ -1,0 +1,185 @@
+<?page title="Σύστημα Αξιολογήσεων Μαθητών ΚΕΣΥ" contentType="text/html;charset=UTF-8"?>
+<?link rel="icon" type="image/x-icon" href="img/favicon.ico"?>
+<zk>
+    <include id="ph" sclass="header" src="header.zul" />
+    <window  border="normal" width="1400px"
+             apply="org.zkoss.bind.BindComposer"
+             viewModel="@id('vm')@init('org.example.MyViewModel')"
+             validationMessages="@id('vmsgs')">
+
+        <grid>
+            <rows>
+                <row width="100%">
+                    <label value="Μαθητολόγιο:" />
+                    <label value="Εύρεση Μαθητή - Κριτήρια Επιλογής" />
+                </row>
+                <row>
+                    Αριθμός Μητρώου
+                    <textbox name="studentAM" width="100%"/>
+                </row>
+                <row>
+                    Επώνυμο Μαθητή
+                    <textbox name="studentSurname"  width="100%"/>
+                </row>
+                <row>
+                    Όνομα Μαθητή
+                    <textbox name="studentName"  width="100%"/>
+                </row>
+                <row>
+                    Σχολείο Μαθητή
+                    <combobox  width="100%"/>
+                </row>
+                <row>
+                    Τάξη Μαθητή
+                    <combobox  width="100%"/>
+                </row>
+                <row>
+                    'Ετος εισαγωγής στο σύστημα
+                    <datebox width="100%"/>
+                </row>
+                <row>
+                    <hlayout>
+                        <button label="Εύρεση" onClick="@command('find')"/>
+                        <button label="Καθαρισμός" onClick="@command('clean')"/>
+                    </hlayout>
+                </row>
+            </rows>
+        </grid>
+
+        <listbox rows="10" width="100%">
+            <listhead>
+                <listheader label="Α.Μ." width="10%" />
+                <listheader label="Όνομα" width="25%" />
+                <listheader label="Επίθετο" width="25%" />
+                <listheader label="Σχολείο" width="25%" />
+                <listheader label="Ταξη" width="15%" />
+
+            </listhead>
+            <listitem value="">
+                <listcell label="" />
+                <listcell label="" />
+                <listcell label="" />
+                <listcell label="" />
+                <listcell label="" />
+            </listitem>
+        </listbox>
+
+
+
+
+
+<!--
+Use the next grid to display an existing student upon selection from the above grid or to add a new student
+operations ons student, student_document and document
+-->
+
+
+        <grid>
+            <rows>
+                <row width="100%">
+                    <label value="Μαθητολόγιο:" />
+                    <label value="Νέος Μαθητής" />
+                </row>
+                <row>
+                    Αριθμός Μητρώου
+                    <textbox  width="100%"/>
+                </row>
+                <row>
+                    Επώνυμο Μαθητή
+                    <textbox   width="100%"/>
+                </row>
+                <row>
+                    Όνομα Μαθητή
+                    <textbox   width="100%"/>
+                </row>
+                <row>
+                    Σχολείο Μαθητή
+                    <combobox  width="100%"/>
+                </row>
+                <row>
+                    Τύπος Σχολείου Μαθητή
+                    <combobox  width="100%"/>
+                </row>
+                <row>
+                    Τάξη
+                    <combobox  width="100%"/>
+                </row>
+                <row>
+                    Φύλλο
+                    <combobox  width="100%"/>
+                </row>
+                <row>
+                    Ημερομηνία Γέννησης
+                    <textbox width="100%"/>
+                </row>
+                <row>
+                    Διεύθυνση Κατοικίας
+                    <textbox width="100%"/>
+                </row>
+                <row>
+                    Τηλέφωνο Οικίας/Ιδρύματος
+                    <textbox width="100%"/>
+                </row>
+                <row>
+                    Πόλη
+                    <combobox  width="100%"/>
+                </row>
+                <row>
+                    Νομός
+                    <combobox  width="100%"/>
+                </row>
+                <row>
+                    Επώνυμο Μητέρας
+                    <textbox   width="100%"/>
+                </row>
+                <row>
+                    Όνομα Μητέρας
+                    <textbox   width="100%"/>
+                </row>
+                <row>
+                    Τηλέφωνο Μητέρας
+                    <textbox   width="100%"/>
+                </row>
+                <row>
+                    Email Μητέρας
+                    <textbox   width="100%"/>
+                </row>
+
+
+                <row>
+                    Επώνυμο Πατέρα
+                    <textbox   width="100%"/>
+                </row>
+                <row>
+                    Όνομα Πατέρα
+                    <textbox   width="100%"/>
+                </row>
+                <row>
+                    Τηλέφωνο Πατέρα
+                    <textbox   width="100%"/>
+                </row>
+                <row>
+                    Email Πατέρα
+                    <textbox   width="100%"/>
+                </row>
+
+                <row>
+                    <hlayout>
+                        <button label="Καθαρισμός" onClick="@command('clean')"/>
+                        <button label="Εισαγωγή" onClick="@command('new')" href="index.zul"/>
+                        <button label="Ενημέρωση" onClick="@command('update')" href="index.zul"/>
+                    </hlayout>
+                    <hlayout>
+                        <button label="Νέα Εγγραφή" onClick="@command('new')"/>
+                        <button label="Διαγραφή"  onClick="@command('delete')"/>
+                    </hlayout>
+                </row>
+                <row>
+                    Αποτέλεσμα Ενέργειας
+                    <label id="resLabel"  width="99%"/>
+                </row>
+            </rows>
+        </grid>
+
+    </window>
+</zk>

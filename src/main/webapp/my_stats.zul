@@ -1,0 +1,16 @@
+<?page title="Σύστημα Αξιολογήσεων Μαθητών ΚΕΣΥ" contentType="text/html;charset=UTF-8"?>
+<?link rel="icon" type="image/x-icon" href="img/favicon.ico"?>
+<zk>
+	<include id="ph" sclass="header" src="header.zul" />
+
+<window  border="normal" width="1400px"
+    apply="org.zkoss.bind.BindComposer"
+    viewModel="@id('vm')@init('org.example.MyViewModel')"
+    validationMessages="@id('vmsgs')">
+	<!--
+    Use tables: select student details from student and evaluation details from student_evaluation
+    -->
+	Θα δούμε τι θα δείξουμε εδώ.
+	</window>
+	<include id="footer" sclass="footer" src="footer.zul" />
+</zk>

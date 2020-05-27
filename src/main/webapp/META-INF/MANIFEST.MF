@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Specification-Title: ZK Application
+Specification-Version: 1.0
+Specification-Vendor: ILLUMINE Ldt.
+Implementation-Title: KESY
+Implementation-URL: http://illumineit.com
+Implementation-Version: 1.0
+Implementation-Vendor: illumineit.com
+

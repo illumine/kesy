@@ -1,0 +1,57 @@
+<?page title="Σύστημα Αξιολογήσεων Μαθητών ΚΕΣΥ" contentType="text/html;charset=UTF-8"?>
+<?link rel="icon" type="image/x-icon" href="img/favicon.ico"?>
+<zk>
+	<include id="ph" sclass="header" src="header.zul" />
+
+<window  border="normal" width="1400px"
+    apply="org.zkoss.bind.BindComposer"
+    viewModel="@id('vm')@init('org.example.MyViewModel')"
+    validationMessages="@id('vmsgs')">
+	<!--
+    Use tables:  CRUD operation on application_params
+    -->
+	Διαχείρηση Παραμέτρων της εφαρμογής.
+
+	<grid>
+		<rows>
+			<row width="100%">
+				<label value="Μαθητολόγιο:" />
+				<label value="Νέος Μαθητής" />
+			</row>
+			<row>
+				ID
+				<textbox  width="100%"/>
+			</row>
+			<row>
+				Όνομα παραμέτρου
+				<textbox   width="100%"/>
+			</row>
+			<row>
+				Τιμή παραμέτρου
+				<textbox   width="100%"/>
+			</row>
+			<row>
+				Άλλαξε τελευταία φορά
+				<datebox  width="100%"/>
+			</row>
+
+			<row>
+				<hlayout>
+					<button label="Καθαρισμός" onClick="@command('clean')"/>
+					<button label="Εισαγωγή" onClick="@command('new')" href="index.zul"/>
+					<button label="Ενημέρωση" onClick="@command('update')" href="index.zul"/>
+				</hlayout>
+				<hlayout>
+					<button label="Νέα Εγγραφή" onClick="@command('new')"/>
+					<button label="Διαγραφή"  onClick="@command('delete')"/>
+				</hlayout>
+			</row>
+			<row>
+				Αποτέλεσμα Ενέργειας
+				<label id="resLabel"  width="99%"/>
+			</row>
+		</rows>
+	</grid>
+	</window>
+	<include id="footer" sclass="footer" src="footer.zul" />
+</zk>

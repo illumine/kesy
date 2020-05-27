@@ -1,0 +1,285 @@
+<!--
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./indexWin"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?taglib uri="http://www.zkoss.org/zkspring/security" prefix="sec"?>
+-->
+<?page title="Σύστημα Αξιολογήσεων Μαθητών ΚΕΣΥ" contentType="text/html;charset=UTF-8"?>
+<?link rel="icon" type="image/x-icon" href="img/favicon.ico"?>
+<zk>
+<include id="ph" sclass="header" src="header.zul" />
+
+<window  border="normal" width="1400px"
+    apply="org.zkoss.bind.BindComposer"
+    viewModel="@id('vm')@init('org.example.MyViewModel')"
+    validationMessages="@id('vmsgs')">
+
+	<!-- Grid populates from the following query:
+     select * from student_evaluation and student -->
+	<grid>
+		<rows>
+			<row width="100%">
+				<label value="Αναθέσεις Μαθητών:" />
+				<label value="Εύρεση Αναθέσης - Κριτήρια Επιλογής" />
+			</row>
+			<row>
+				Αριθμός Μητρώου
+				<textbox name="studentAM" width="100%"/>
+			</row>
+			<row>
+				Επώνυμο Μαθητή
+				<textbox name="studentSurname"  width="100%"/>
+			</row>
+			<row>
+				Σχολείο Μαθητή
+				<combobox  width="100%"/>
+			</row>
+			<row>
+				'Ετος εισαγωγής στο σύστημα
+				<datebox width="100%"/>
+			</row>
+			<row>
+				Εντεταλμένο Προσωπικό
+				<!-- Combobox populates from the following query:
+                 select surname,name from personel -->
+				<combobox  width="100%"/>
+			</row>
+			<row>
+				<hlayout>
+				<button label="Εύρεση" onClick="@command('find')"/>
+				<button label="Καθαρισμός" onClick="@command('clean')"/>
+				</hlayout>
+			</row>
+		</rows>
+	</grid>
+
+		<listbox rows="10" width="100%">
+			<listhead>
+				<listheader label="Α.Μ." width="5%" />
+				<listheader label="Α.Π." width="5%" />
+				<listheader label="Όνομα" width="9%" />
+				<listheader label="Επίθετο" width="9%" />
+				<listheader label="Σχολείο" width="9%" />
+				<listheader label="Εκπ/κος ΣΕΠ" width="9%" />
+				<listheader label="Εκπ/κος" width="10%" />
+				<listheader label="Κοιν. Λειτ. (ΠΕ30)" width="9%" />
+				<listheader label="Ψυχολογος (ΠΕ23)" width="9%" />
+				<listheader label="Λογ/κος (ΠΕ21)" width="9%" />
+				<listheader label="Εργο/της (ΠΕ29)" width="9%" />
+			</listhead>
+			<listitem value="">
+				<listcell label="" />
+				<listcell label="" />
+				<listcell label="" />
+				<listcell label="" />
+				<listcell label="" />
+				<listcell label="" />
+				<listcell label="" />
+				<listcell label="" />
+				<listcell label="" />
+				<listcell label="" />
+				<listcell label="" />
+			</listitem>
+		</listbox>
+
+
+
+
+	<!--
+    Use the next grid to display an existing record from student_evaluation upon selection from the above grid
+    or to add a new student_evaluation
+
+    Attached files are triggering operations on student_document and document
+    -->
+
+
+	<grid>
+		<rows>
+			<row width="100%">
+				<label value="Ανάθεση:" />
+				<label value="Ανάθεση μαθητή" />
+			</row>
+			<row>
+				<!-- Display only - not editable: existing A.M. of the student the evaluation is for. -->
+				Αριθμός Μητρώου Μαθητή
+				<label  width="100%"/>
+			</row>
+			<row>
+				<!-- Display only - not editable: existing surname of the student the evaluation is for. -->
+				Επώνυμο Μαθητή
+				<label   width="100%"/>
+			</row>
+			<row>
+				<!-- Display only - not editable: existing name of the student the evaluation is for. -->
+				Όνομα Μαθητή
+				<label   width="100%"/>
+			</row>
+			<row style="background:#BDE0F7;border: 1px solid grey;text-align:justify;text-align:center">
+				Προσωπικό που θα μετέχει στην Αξιολόγηση
+			</row>
+			<!-- Follows new data for defining the student_evaluation. -->
+
+			<!-- Combobox populates from the following query:
+			select surname,name  from personel where specialty = (
+			   select from personel_specialty where description ='ΕΚΠ/ΚΟΣ ΣΕΠ' and still_in_school ='T' )
+			-->
+			<row>
+				ΕΚΠ/ΚΟΣ ΣΕΠ  <combobox  width="100%" />
+			</row>
+			<row>
+				ΕΚΠ/ΚΟΣ      <combobox  width="100%" />
+			</row>
+			<row>
+				ΚΟΙΝ. ΛΕΙΤΟΥΡΓΟΣ (ΠΕ30)      <combobox  width="100%" />
+			</row>
+			<row>
+				ΨΥΧΟΛΟΓΟΣ (ΠΕ23)             <combobox  width="100%" />
+			</row>
+			<row>
+				ΛΟΓ/ΚΟΣ (ΠΕ21)               <combobox  width="100%" />
+			</row>
+			<row>
+				ΕΡΓΟ/ΤΗΣ (ΠΕ29)               <combobox  width="100%" />
+			</row>
+			<!-- Combobox populates from the following query:
+                 select surname from personel where specialty = (
+                        select from personel_specialty where still_in_school ='T' )
+             -->
+			<row>
+				Άλλη Ειδικότητα του σχολείου    <combobox  width="100%" />
+			</row>
+			<row style="background:#BDE0F7;border: 1px solid grey;text-align:justify;text-align:center">
+				Έαν είναι Επαναξιολόγηση του μαθητή:
+			</row>
+			<row>
+				Είναι Επαναξιολόγηση
+				<checkbox  width="100%"/>
+			</row>
+			<row> <!-- if previous is set -->
+				Αρ. Πρωτοκόλου πρώτης Αξιολόγησης
+				<textbox  width="100%"/>
+			</row>
+			<row style="background:#BDE0F7;border: 1px solid grey;text-align:justify;text-align:center">
+				Έαν υπάρχει προηγούμενη Γνωμάτευση:
+			</row>
+			<row>
+				Φορέας
+				<textbox  width="100%"/>
+			</row>
+			<row>
+				Αρ. Πρωτ. της γνωμάτευσης στο φορέα
+				<textbox  width="100%"/>
+			</row>
+			<row>
+				Ημερομηνία γνωμάτευσης
+				<datebox  width="100%"/>
+			</row>
+			<row>
+				Είδος Γνωμάτευσης
+				<textbox  width="100%"/>
+			</row>
+			<row>
+				Είναι μόνιμη Γνωμάτευση
+				<checkbox  width="100%"/>
+			</row>
+			<row>
+			Έγγραφα
+				<!-- Uploaded document populates the following tables:
+                     insert into document, student_document -->
+			<vbox width="99%">
+				Επιλέξτε τα αρχεία που συνοδεύουν το μαθητή
+				<listbox rows="4" width="99%">
+					<listhead>
+						<listheader label="Αρ." width="5%" />
+						<listheader label="Αρχείο" />
+					</listhead>
+					<listitem value="">
+						<listcell label="" />
+						<listcell label="" />
+					</listitem>
+					<listfoot>
+						<listfooter label="" width="20%" />
+						<listfooter
+								label="Ανεβάσατε 0 Αρχεία 0 ΜΒ" />
+					</listfoot>
+				</listbox>
+				<hbox>
+					<button label="Εισαγωγή Νέου Αρχείου" />
+					<button label="Ακύρωση Αρχείου" />
+				</hbox>
+			</vbox>
+			</row>
+			<!--
+     		Follows the assignment evaluation fields.
+     		When those are filled, the student has already completed the evaluation
+     		the case is set for the record and this goes to the historical data of the kesy
+ 			-->
+			<row style="background:#BDE0F7;border: 1px solid grey;text-align:justify;text-align:center">
+				ΕΚΔΟΣΗ ΕΚΘΕΣΗ ΑΞΙΟΛΟΓΗΣΗΣ - ΓΝΩΜΑΤΕΥΣΗ
+			</row>
+			<row>
+				ΑΡ. ΠΡΩΤ. Γνωμάτευσης
+				<textbox  width="100%"/>
+			</row>
+			<row>
+				Ημερομηνία Γνωμάτευσης
+				<datebox  width="100%"/>
+			</row>
+			<row>
+				Ημερομηνία Επίδοσης Γνωμάτευσης
+				<datebox  width="100%"/>
+			</row>
+			<row>
+				Διαγνωση
+				<textbox  width="100%"/>
+			</row>
+			<row>
+				Πρόταση
+				<textbox  width="100%"/>
+			</row>
+			<row>
+				Είναι μόνιμη Γνωμάτευση
+				<checkbox  width="100%"/>
+			</row>
+			<row>
+				Ορισμός ΕΤΟΥΣ επανεξέτασης
+				<datebox  width="100%"/>
+			</row>
+			<row>
+				Παρατηρήσεις
+				<textbox  width="100%"/>
+			</row>
+			<row>
+				Κλειστή - Αρχειοθετημένη
+				<checkbox  width="100%"/>
+			</row>
+			<row>
+				<hlayout>
+					<button label="Έκδοση 'Έκθεσης Αξιολόγησης" onClick="@command('evaluation review')" href="index.zul"/>
+				</hlayout>
+				<hlayout>
+					<button label="Έκδοση Βεβαίωσης"            onClick="@command('evaluation certificate')" href="index.zul"/>
+
+				</hlayout>
+			</row>
+			<row>
+				<hlayout>
+					<button label="Καθαρισμός" onClick="@command('clean')"/>
+					<button label="Εισαγωγή" onClick="@command('new')" href="index.zul"/>
+					<button label="Ενημέρωση" onClick="@command('update')" href="index.zul"/>
+				</hlayout>
+				<hlayout>
+					<button label="Νέα Εγγραφή" onClick="@command('new')"/>
+					<button label="Διαγραφή"  onClick="@command('delete')"/>
+				</hlayout>
+			</row>
+			<row>
+				Αποτέλεσμα Ενέργειας
+				<label id="resLabel"  width="99%"/>
+			</row>
+		</rows>
+	</grid>
+
+
+	</window>
+	<include id="footer" sclass="footer" src="footer.zul" />
+</zk>
