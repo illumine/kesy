@@ -36,3 +36,6 @@ https://www.zkoss.org/wiki/ZK_Installation_Guide/Quick_Start/Create_and_Run_Your
 
 Tutorial for installing and testing ZK with IDEA -  Must Read\
 https://www.zkoss.org/wiki/ZK_Installation_Guide/Quick_Start/Create_and_Run_Your_First_ZK_Application_with_IntelliJ_and_ZKIdea
+
+ListBox example: ListBox CRUD operations using Idea, Maven, JPA -  Must Read\
+https://www.zkoss.org/wiki/ZK_Getting_Started/Get_ZK_Up_and_Running_with_MVC
